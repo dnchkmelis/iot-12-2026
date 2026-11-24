@@ -19,11 +19,12 @@ class Sneakers:
     """Represent a pair of sneakers."""
 
     def __init__(self, details: SneakerDetails):
+        """Initialize a pair of sneakers."""
         self._brand = details.brand
         self._size = details.size
         self._color = details.color
-        self._price = details.price
-        self._quantity = details.quantity
+        self.price = details.price
+        self.quantity = details.quantity
         self._material = details.material
         self._number_of_sales = details.number_of_sales
         print(f"Створено об'єкт кросівок: {self._brand} (розмір: {self._size})")
@@ -70,6 +71,8 @@ class Sneakers:
     @price.setter
     def price(self, value):
         """Set the sneaker price."""
+        if value < 0:
+            raise ValueError("Ціна не може бути від'ємною.")
         self._price = value
 
     @property
@@ -80,6 +83,8 @@ class Sneakers:
     @quantity.setter
     def quantity(self, value):
         """Set the quantity in stock."""
+        if value < 0:
+            raise ValueError("Кількість на складі не може бути від'ємною.")
         self._quantity = value
 
     @property
@@ -115,6 +120,7 @@ class SportShoesStore:
     """Manage a sports shoe store assortment."""
 
     def __init__(self, store_name: str):
+        """Initialize the sports shoe store."""
         self._store_name = store_name
         self._assortment = []
         print(f"Магазин спортивного взуття '{self._store_name}' відкрито.")
