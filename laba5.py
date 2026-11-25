@@ -1,5 +1,6 @@
 """Classes for managing a sports shoe store."""
 
+import math
 from typing import NamedTuple
 
 
@@ -26,7 +27,7 @@ class Sneakers:
         self.price = details.price
         self.quantity = details.quantity
         self._material = details.material
-        self._number_of_sales = details.number_of_sales
+        self.number_of_sales = details.number_of_sales
         print(f"Створено об'єкт кросівок: {self._brand} (розмір: {self._size})")
 
     def __del__(self):
@@ -71,6 +72,12 @@ class Sneakers:
     @price.setter
     def price(self, value):
         """Set the sneaker price."""
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or isinstance(value, float) and not math.isfinite(value)
+        ):
+            raise ValueError("Ціна має бути коректним числом.")
         if value < 0:
             raise ValueError("Ціна не може бути від'ємною.")
         self._price = value
@@ -105,6 +112,8 @@ class Sneakers:
     @number_of_sales.setter
     def number_of_sales(self, value):
         """Set the number of sold pairs."""
+        if value < 0:
+            raise ValueError("Кількість продажів не може бути від'ємною.")
         self._number_of_sales = value
 
     def __str__(self):
