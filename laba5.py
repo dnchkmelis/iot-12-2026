@@ -21,53 +21,50 @@ class Sneakers:
 
     def __init__(self, details: SneakerDetails):
         """Initialize a pair of sneakers."""
-        self._brand = details.brand
-        self._size = details.size
-        self._color = details.color
+        self._details = details
         self.price = details.price
         self.quantity = details.quantity
-        self._material = details.material
         self.number_of_sales = details.number_of_sales
-        print(f"Створено об'єкт кросівок: {self._brand} (розмір: {self._size})")
+        print(f"Створено об'єкт кросівок: {self.brand} (розмір: {self.size})")
 
     def __del__(self):
         """Report when the sneaker object is deleted."""
-        print(f"Видалено об'єкт кросівок: {self._brand}")
+        print(f"Видалено об'єкт кросівок: {self.brand}")
 
     @property
     def brand(self):
         """Return the sneaker brand."""
-        return self._brand
+        return self._details.brand
 
     @brand.setter
     def brand(self, value):
         """Set the sneaker brand."""
-        self._brand = value
+        self._details = self._details._replace(brand=value)
 
     @property
     def size(self):
         """Return the sneaker size."""
-        return self._size
+        return self._details.size
 
     @size.setter
     def size(self, value):
         """Set the sneaker size."""
-        self._size = value
+        self._details = self._details._replace(size=value)
 
     @property
     def color(self):
         """Return the sneaker color."""
-        return self._color
+        return self._details.color
 
     @color.setter
     def color(self, value):
         """Set the sneaker color."""
-        self._color = value
+        self._details = self._details._replace(color=value)
 
     @property
     def price(self):
         """Return the sneaker price."""
-        return self._price
+        return self._details.price
 
     @price.setter
     def price(self, value):
@@ -80,48 +77,48 @@ class Sneakers:
             raise ValueError("Ціна має бути коректним числом.")
         if value < 0:
             raise ValueError("Ціна не може бути від'ємною.")
-        self._price = value
+        self._details = self._details._replace(price=value)
 
     @property
     def quantity(self):
         """Return the quantity in stock."""
-        return self._quantity
+        return self._details.quantity
 
     @quantity.setter
     def quantity(self, value):
         """Set the quantity in stock."""
         if value < 0:
             raise ValueError("Кількість на складі не може бути від'ємною.")
-        self._quantity = value
+        self._details = self._details._replace(quantity=value)
 
     @property
     def material(self):
         """Return the sneaker material."""
-        return self._material
+        return self._details.material
 
     @material.setter
     def material(self, value):
         """Set the sneaker material."""
-        self._material = value
+        self._details = self._details._replace(material=value)
 
     @property
     def number_of_sales(self):
         """Return the number of sold pairs."""
-        return self._number_of_sales
+        return self._details.number_of_sales
 
     @number_of_sales.setter
     def number_of_sales(self, value):
         """Set the number of sold pairs."""
         if value < 0:
             raise ValueError("Кількість продажів не може бути від'ємною.")
-        self._number_of_sales = value
+        self._details = self._details._replace(number_of_sales=value)
 
     def __str__(self):
         """Return a human-readable description of the sneakers."""
         return (
-            f"Бренд: {self._brand}, Розмір: {self._size}, Колір: {self._color}, "
-            f"Ціна: {self._price} грн, Кількість на складі: {self._quantity}, "
-            f"Матеріал: {self._material}, Продано пар: {self._number_of_sales}"
+            f"Бренд: {self.brand}, Розмір: {self.size}, Колір: {self.color}, "
+            f"Ціна: {self.price} грн, Кількість на складі: {self.quantity}, "
+            f"Матеріал: {self.material}, Продано пар: {self.number_of_sales}"
         )
 
 
